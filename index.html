@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>conversation</h1>
+
+    <!-- message list data-bind="attr: { src: thumbnailUrl }" -->
+    <ul id="messages">
+        <li>
+            <a href="#">message 1</a>
+            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+        </li>
+        <li>
+            <a href="#">message 1</a>
+            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+        </li>
+        <li>
+            <a href="#">message 1</a>
+            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+        </li>
+        <li>
+            <a href="#">message 1</a>
+            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+        </li>
+        <li>
+            <a href="#">message 1</a>
+            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+        </li>
+        <li>
+            <a href="#">message 1</a>
+            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+        </li>
+        <li>
+            <a href="#">message 1</a>
+            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+        </li>
+        <li>
+            <a href="#">message 1</a>
+            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+        </li>
+        <li>
+            <a href="#">message 1</a>
+            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+        </li>
+    </ul>
+
+    <!-- gif container -->
+    <ul id="gif-list" style="display:none;" 
+        data-bind="foreach: tenor.tenorViewModel.gifs, 
+                   event : { scroll : checkIfBottom},
+                   visible : true">
+        <li>
+            <img data-bind="attr : { src : media[0].nanogif.url }" />
+            <a href="#" data-bind="text : $index, click : $root.addToMessageList" style="text-align: center"> 
+                <span data-bind="text : $index"></span>
+            </a>
+        </li>
+    </ul>
+    
+    <!-- error message -->
+    <div data-bind="visible: errorMessage">
+        <p style="color: red">Error message:</p>
+        <p data-bind="text : 'ADD ' + errorMessage"></p>
+    </div>
+
+    <!-- searchbox -->
+    <div id="search-panel">
+        <input id="text-input"  type="text" data-bind="textInput: currentSearchTerm">        
+    </div>
+
+
+    <!-- Spinner  -->
+    <div style="margin-left:15px; display:inline-block; width:28px;">
+        <span data-bind="visible : isLoading">
+            <!-- Svg Spinner By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+            <svg width="20" height="20" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+                        <stop stop-color="#7a808d" stop-opacity="0" offset="0%" />
+                        <stop stop-color="#7a808d" stop-opacity=".631" offset="63.146%" />
+                        <stop stop-color="#7a808d" offset="100%" />
+                    </linearGradient>
+                </defs>
+                <g fill="none" fill-rule="evenodd">
+                    <g transform="translate(1 1)">
+                        <path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="2">
+                            <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"
+                            />
+                        </path>
+                        <circle fill="#7a808d" cx="36" cy="18" r="1">
+                            <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"
+                            />
+                        </circle>
+                    </g>
+                </g>
+            </svg>
+        </span>
+
+    </div>
+
+    <script type="text/javascript" src="third-party/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="third-party/knockout-3.4.1.min.js"> </script>
+    <script type="text/javascript" src="tenor.js"></script>
+
+    <script type="text/javascript">
+        $().ready(function () {
+
+            
+            var vm = tenor.tenorViewModel;
+            ko.applyBindings(vm);
+            vm.search();
+        });
+    </script>
+</body>
+</htm>
