@@ -13,6 +13,9 @@ var tenor = (function () {
 
         self.gifs = ko.observableArray().extend( {rateLimit : 50 });        
         self.currentSearchTerm = ko.observable().extend({ rateLimit: 500 });
+
+        self.messages = ko.observableArray();
+
         self.isLoading = ko.observable(false);
         self.errorMessage = ko.observable();
         self.search = function () {
@@ -34,34 +37,42 @@ var tenor = (function () {
             }
         };
 
-        self.addToMessageList = function(){
-            console.log('adding to messagelist');
+        self.addToMessageList = function(element){
+            self.messages.push(element);
         };
 
+        self.handleMouseUp = function(data,event){
+            var container = $("#gif-list");
+            if (!container.is(event.target) && container.has(event.target).length === 0) 
+            {
+                container.hide();
+            }
+        };
+
+
         // todo: detect when the component is hidden and dispose subscrition
-        var subscriptionToInputChange = self.currentSearchTerm.subscribe(function (data) {
-            console.log(data);
-            if( !data ) {
-                console.log('emptystring. clean');
+        var subscriptionToInputChange = self.currentSearchTerm.subscribe(function (data) {            
+            if( !data ) {                
                 self.gifs.removeAll();
                 return;
-            }
-            console.log('not empty!' + data);
+            }            
             self.search();
         });
 
 
+        
 
         function GetIdAndThenGetGifs() {
             self.errorMessage("");
             if (lastAnonId != undefined) {
-                getGifs();
+                getGifs();                
                 return;
             }
 
             $.get(getAnonIdUrl).done(function (data) {
-
+                
                 if(!data.anon_id) {
+                    console.log(data.error);
                     self.errorMessage(data.error);
                     return;
                 }

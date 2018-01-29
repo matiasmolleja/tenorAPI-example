@@ -6,72 +6,34 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
 </head>
 
-<body>
+<body data-bind="event : { mouseup : handleMouseUp }">
 
     <h1>conversation</h1>
 
-    <!-- message list data-bind="attr: { src: thumbnailUrl }" -->
-    <ul id="messages">
+    <!-- message list" -->
+    <ul id="messages" data-bind="foreach: tenor.tenorViewModel.messages">
         <li>
-            <a href="#">message 1</a>
-            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
-        </li>
-        <li>
-            <a href="#">message 1</a>
-            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
-        </li>
-        <li>
-            <a href="#">message 1</a>
-            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
-        </li>
-        <li>
-            <a href="#">message 1</a>
-            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
-        </li>
-        <li>
-            <a href="#">message 1</a>
-            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
-        </li>
-        <li>
-            <a href="#">message 1</a>
-            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
-        </li>
-        <li>
-            <a href="#">message 1</a>
-            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
-        </li>
-        <li>
-            <a href="#">message 1</a>
-            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
-        </li>
-        <li>
-            <a href="#">message 1</a>
-            <img class="card-thumbnail" src="https://media.tenor.com/images/f6fe8d1d0463f4e51b6367bbecf56a3e/tenor.gif">
+            <a href="#" target="blank" data-bind="attr : {href : url}, text: url"></a>
+            <img data-bind="attr : {src : media[0].nanogif.url}" />
         </li>
     </ul>
 
     <!-- gif container -->
-    <ul id="gif-list" style="display:none;" 
-        data-bind="foreach: tenor.tenorViewModel.gifs, 
-                   event : { scroll : checkIfBottom},
-                   visible : true">
+    <ul id="gif-list" style="display:none;" data-bind="foreach: gifs, event : { scroll : checkIfBottom}, visible : gifs().length">
         <li>
-            <img data-bind="attr : { src : media[0].nanogif.url }" />
-            <a href="#" data-bind="text : $index, click : $root.addToMessageList" style="text-align: center"> 
-                <span data-bind="text : $index"></span>
-            </a>
+            <img data-bind="attr : { src : media[0].nanogif.url }, , click : $root.addToMessageList" />
         </li>
     </ul>
-    
+
     <!-- error message -->
-    <div data-bind="visible: errorMessage">
+    <div id="error-panel" data-bind="visible: errorMessage">
         <p style="color: red">Error message:</p>
-        <p data-bind="text : 'ADD ' + errorMessage"></p>
+        <p data-bind="text : errorMessage"></p>
     </div>
 
     <!-- searchbox -->
     <div id="search-panel">
-        <input id="text-input"  type="text" data-bind="textInput: currentSearchTerm">        
+        <input id="text-input" type="text" autofocus="autofocus" data-bind="textInput: currentSearchTerm" placeholder="write your search term here">
     </div>
 
 
@@ -110,8 +72,6 @@
 
     <script type="text/javascript">
         $().ready(function () {
-
-            
             var vm = tenor.tenorViewModel;
             ko.applyBindings(vm);
             vm.search();

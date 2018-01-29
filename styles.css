@@ -22,13 +22,24 @@ h1 {
     padding-top: 8px;
 }
 
+/* a {
+    color:#6e9fe8;
+} */
+
+
+a:link, a:visited, a:hover, a:active {
+    color: #6e9fe8;
+    text-decoration: none;
+}
+
+
 ul{
     list-style: none;
 }
 
 #messages {
     background-color: #fff;
-    padding: 0;
+    padding: 50px 0px 0px 0px;
     margin: 0;
     height: 100%;
 }
@@ -40,28 +51,28 @@ ul{
 
 #messages a {
     display: block;
-    color:#6e9fe8;
+   
     margin-bottom: 10px;
 }
 
 #messages img {
-    display: block;
-    color:#6e9fe8;
+    display: block;    
     width:200px;
 }
 
 #gif-list {
     display: block;
-    background-color: orange;
+    background-color: #2c2c34;
     /* overflow:scroll; */
     overflow-y: auto;
     max-height: 300px;
-    padding: 0;
+    padding: 8px 0px 0px 0px;
     margin: 0;
     position: fixed;
     bottom: 50px;
     left:8px;
     width: 400px;
+    text-align: center;   
 }
 
 #gif-list li {
@@ -71,7 +82,8 @@ ul{
 
 #gif-list li img {
     width:120px;
-    height: 82px;    
+    height: 82px;
+    cursor: pointer;  
 }
 
 #gif-list li a {
@@ -92,5 +104,14 @@ ul{
 #text-input {
     margin-left: 8px;
     margin-top:15px; 
-    width:300px;
+    width:400px;
+}
+
+#error-panel{
+    background-color: bisque;
+    padding: 16px;
+    position:fixed;
+    bottom:50px;
+    right: 8px;
+    /* display: none; */
 }
