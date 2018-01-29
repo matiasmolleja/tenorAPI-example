@@ -1,6 +1,6 @@
 var tenor = (function () {
 
-    var apiKey = '';
+    var apiKey = ''; 
     var getAnonIdUrl = "https://api.tenor.com/v1/anonid?key=" + apiKey;
     var lastAnonId;
 

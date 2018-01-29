@@ -5,8 +5,12 @@ Simple example static site connecting an imaginary chat web app to Tenor API. It
 
 ## How to use it ##
 
-You need an api key from Tenor. You can grab it [here](https://tenor.com/developer/keyregistration)
-
+You need an api key from Tenor. You can grab it [here](https://tenor.com/developer/keyregistration), and use it on "apiKey"
 
 Just search for gifs with the term you write on the textbox.
 It provides infinite scrolling.
+
+You should see something like this:
+
+![small-demo](small-demo.gif "Small Demo")
+
