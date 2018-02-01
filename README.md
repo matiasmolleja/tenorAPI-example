@@ -9,8 +9,3 @@ You need an api key from Tenor. You can grab it [here](https://tenor.com/develop
 
 Just search for gifs with the term you write on the textbox.
 It provides infinite scrolling.
-
-You should see something like this:
-
-![small-demo](small-demo.gif "Small Demo")
-
